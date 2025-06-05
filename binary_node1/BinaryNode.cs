@@ -25,10 +25,30 @@ namespace binary_node1
 
         public override string ToString()
         {
-            const string nullPlaceholder = "null"; 
-            // Expected format 
-            // my_value: left_child_value right_child_value
-            return $"{this.Value}: {(this.LeftChild==null? nullPlaceholder:this.LeftChild.Value)} {(this.RightChild == null ? nullPlaceholder : this.RightChild.Value)}";
+            return ToString("");
         }
+
+        private string ToString(string spaces)
+        {
+            string result = string.Format("{0}{1}:\n", spaces, Value);
+
+            // See if the node has any children.
+            if ((LeftChild != null) || (RightChild != null))
+            {
+                // Add null or the child's value.
+                if (LeftChild == null)
+                    result += string.Format("{0}{1}null\n", spaces, "  ");
+                else
+                    result += LeftChild.ToString(spaces + "  ");
+
+                // Add null or the child's value.
+                if (RightChild == null)
+                    result += string.Format("{0}{1}null\n", spaces, "  ");
+                else
+                    result += RightChild.ToString(spaces + "  ");
+            }
+            return result;
+        }
+
     }
 }

@@ -28,5 +28,14 @@ namespace nary_node1
             }
             return sb.ToString();
         }
+
+        private string ToString(string spaces)
+        {           
+            string result = string.Format("{0}{1}:\n", spaces, Value);
+          
+            foreach (NaryNode<T> child in Children)
+                result += child.ToString(spaces + "  ");
+            return result;
+        }
     }
 }
